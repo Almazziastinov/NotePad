@@ -134,7 +134,7 @@ namespace NotePad
         }
         public void PasteText()
         {
-            Clipboard.GetText();
+            textBox1.Text = textBox1.Text.Substring(0, textBox1.SelectionStart) + Clipboard.GetText() + textBox1.Text.Substring(textBox1.SelectionStart, textBox1.Text.Length - textBox1.SelectionStart);
         }
 
         private void OnCopyClic(object sender, EventArgs e)
@@ -150,6 +150,16 @@ namespace NotePad
         private void OnPasteClick(object sender, EventArgs e)
         {
             PasteText();
+        }
+        public void OnClosing(object sender, EventArgs e)
+        {
+            SaveUnsavedFile();
+        }
+
+        private void OnFontClic(object sender, EventArgs e)
+        {
+            FontSetting fontSetting = new FontSetting();
+            fontSetting.Show();
         }
     }
 }
